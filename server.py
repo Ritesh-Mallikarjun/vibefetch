@@ -1,1 +1,41 @@
-from flask import Flask, request, jsonify\nimport yt_dlp\n\napp = Flask(__name__)\n\n@app.route('/download/youtube', methods=['POST'])\ndef download_youtube():\n    url = request.json.get('url')\n    options = {\n        'format': 'best',\n        'outtmpl': '%(title)s.%(ext)s'\n    }\n    with yt_dlp.YoutubeDL(options) as ydl:\n        ydl.download([url])\n    return jsonify({'message': 'Download complete for YouTube URL'}), 200\n\n@app.route('/download/instagram', methods=['POST'])\ndef download_instagram():\n    url = request.json.get('url')\n    options = {\n        'format': 'best',\n        'outtmpl': '%(title)s.%(ext)s'\n    }\n    with yt_dlp.YoutubeDL(options) as ydl:\n        ydl.download([url])\n    return jsonify({'message': 'Download complete for Instagram URL'}), 200\n\n@app.route('/download/pinterest', methods=['POST'])\ndef download_pinterest():\n    url = request.json.get('url')\n    options = {\n        'format': 'best',\n        'outtmpl': '%(title)s.%(ext)s'\n    }\n    with yt_dlp.YoutubeDL(options) as ydl:\n        ydl.download([url])\n    return jsonify({'message': 'Download complete for Pinterest URL'}), 200\n\nif __name__ == '__main__':\n    app.run(debug=True)
+from flask import Flask, request, jsonify
+import yt_dlp
+
+app = Flask(__name__)
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'healthy'}), 200
+
+@app.route('/info', methods=['POST'])
+def info_extraction():
+    data = request.json
+    url = data.get('url')
+
+    if not url:
+        return jsonify({'error': 'URL is required'}), 400
+    
+    with yt_dlp.YoutubeDL() as ydl:
+        info = ydl.extract_info(url, download=False)
+        return jsonify(info)
+
+@app.route('/download', methods=['POST'])
+def download_video():
+    data = request.json
+    url = data.get('url')
+
+    if not url:
+        return jsonify({'error': 'URL is required'}), 400
+    
+    ydl_opts = {
+        'format': 'best',
+        'outtmpl': '%(title)s.%(ext)s',
+    }
+
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+    
+    return jsonify({'status': 'download complete'}), 200
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
