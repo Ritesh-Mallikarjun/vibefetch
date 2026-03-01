@@ -1,19 +1,5 @@
 [phases.setup]
-nixPkgs = ["ffmpeg"]
-
-[phases.install]
-cmds = ["pip install -r requirements.txt"]
+nixPkgs = ["python311", "ffmpeg"]
 
 [start]
 cmd = "python server.py"
-```
-
-Remove `python311` and `gcc` — Railway already has Python, we only need to add FFmpeg.
-
----
-
-**Also update `requirements.txt` on GitHub — replace everything with:**
-```
-flask==3.0.3
-flask-cors==4.0.1
-yt-dlp
