@@ -73,6 +73,11 @@ def download():
                 'format': f'bestvideo[height<={quality}]+bestaudio/best[height<={quality}]/best[height<={quality}]',
                 'outtmpl': out_tmpl,
                 'merge_output_format': 'mp4',
+                'postprocessor_args': [
+                    '-c:v', 'copy',
+                    '-c:a', 'aac',
+                    '-b:a', '192k'
+                ],
                 'quiet': True,
             }
             ext = 'mp4'
