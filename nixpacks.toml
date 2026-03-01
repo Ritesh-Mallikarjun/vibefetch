@@ -1,8 +1,30 @@
 [phases.setup]
-nixPkgs = ["ffmpeg", "python311"]
+nixPkgs = ["ffmpeg", "python311", "gcc"]
 
 [phases.install]
 cmds = ["pip install -r requirements.txt"]
 
 [start]
 cmd = "python server.py"
+```
+
+Go to `github.com/Ritesh-Mallikarjun/vibefetch` → click `nixpacks.toml` → ✏️ Edit → paste above → Commit.
+
+Railway will auto-redeploy in ~2 minutes.
+
+---
+
+**Also I also noticed this in your log:**
+```
+WARNING: Signature extraction failed. Some formats may be missing
+```
+
+This means yt-dlp version is outdated on Railway. Add this variable too:
+
+| Variable | Value |
+|----------|-------|
+| `YTDLP_UPDATE` | `1` |
+
+And update `requirements.txt` on GitHub — change `yt-dlp` line to:
+```
+yt-dlp>=2024.11.18
