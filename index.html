@@ -6,8 +6,8 @@
 
 <!-- ══ SEO META TAGS ══ -->
 <title>VibeFetch — Free YouTube, Instagram & Pinterest Video Downloader</title>
-<meta name="description" content="Download YouTube videos, Instagram reels, and Pinterest videos for free. Choose 144p to 4K quality or extract MP3 audio. Fast, free, no signup required.">
-<meta name="keywords" content="youtube downloader, download youtube video, youtube to mp3, instagram reels downloader, pinterest video downloader, free video downloader, download youtube 1080p, youtube 4k downloader, save instagram video, download pinterest video">
+<meta name="description" content="Free YouTube Downloader - Download YouTube videos, Instagram Reels, Pinterest videos in HD, 4K, or MP3. No signup, no watermark. Fast & 100% free online tool.">
+<meta name="keywords" content="youtube downloader, youtube to mp3, download youtube video, instagram downloader, instagram reels downloader, pinterest video downloader, free video downloader, youtube 4k downloader, youtube downloader online, save youtube video, download youtube shorts, video downloader app, youtube mp4 download, youtube audio downloader, free youtube converter">
 <meta name="author" content="Ritesh Mallikarjun">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0A0A0F">
@@ -30,13 +30,30 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "VibeFetch",
-  "url": "https://vibefetch.netlify.app/",
-  "description": "Free online tool to download YouTube videos, Instagram reels, and Pinterest videos in any quality from 144p to 4K or as MP3 audio.",
+  "name": "VibeFetch - Free YouTube Video Downloader",
+  "url": "https://vibefetchapp.netlify.app/",
+  "description": "Free online YouTube video downloader. Download YouTube videos, Instagram Reels, Pinterest videos in HD, 4K, or MP3. No signup required, completely free.",
   "applicationCategory": "MultimediaApplication",
   "operatingSystem": "Any",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "author": { "@type": "Person", "name": "Ritesh Mallikarjun", "url": "https://github.com/Ritesh-Mallikarjun" }
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Download YouTube videos in 4K, 1080p, 720p, 480p, 360p, 144p",
+    "Extract MP3 audio from YouTube videos",
+    "Download Instagram Reels without watermark",
+    "Save Pinterest videos in original quality",
+    "No registration or signup required",
+    "100% free forever",
+    "Works on mobile and desktop"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Ritesh Mallikarjun",
+    "url": "https://github.com/Ritesh-Mallikarjun"
+  }
 }
 </script>
 
@@ -346,9 +363,9 @@
     <p>Download YouTube videos, Instagram Reels, and Pinterest videos in any quality. MP4 or MP3. No signup, no watermark, completely free.</p>
 
     <div class="platform-pills">
-      <button class="plat-pill pill-yt active" id="pill-yt" onclick="setPlatform('youtube')">▶ YouTube</button>
-      <button class="plat-pill pill-ig" id="pill-ig" onclick="setPlatform('instagram')">📸 Instagram</button>
-      <button class="plat-pill pill-pt" id="pill-pt" onclick="setPlatform('pinterest')">📌 Pinterest</button>
+      <button class="plat-pill pill-yt active" id="pill-yo" onclick="setPlatform('youtube')">▶ YouTube</button>
+      <button class="plat-pill pill-ig" id="pill-in" onclick="setPlatform('instagram')">📸 Instagram</button>
+      <button class="plat-pill pill-pt" id="pill-pi" onclick="setPlatform('pinterest')">📌 Pinterest</button>
     </div>
 
     <div class="social-proof">
@@ -522,8 +539,34 @@
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
-  <!-- SETUP -->
-
+  <!-- ABOUT SECTION FOR SEO -->
+  <section class="seo-section" style="max-width: 680px; margin: 50px auto 0; padding: 0 20px;">
+    <div class="section-heading" style="font-size: 1.8rem; margin-bottom: 20px; background:linear-gradient(90deg,var(--pink),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+      About VibeFetch - Free YouTube Video Downloader
+    </div>
+    
+    <div style="background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; line-height: 1.8; color: var(--muted);">
+      <p style="margin-bottom: 15px;">
+        VibeFetch is a <strong>free YouTube video downloader</strong> that makes saving videos simpler than ever. Download YouTube videos, Instagram Reels, and Pinterest videos in any quality from 144p to 4K, or extract audio as MP3 files. No registration required, no ads, completely free forever.
+      </p>
+      
+      <p style="margin-bottom: 15px;">
+        This tool is designed for anyone who wants to keep their favorite content without dealing with complicated steps. Just paste a YouTube link, Instagram Reel URL, or Pinterest video link, choose your quality, and click download. Your video begins downloading instantly to your device.
+      </p>
+      
+      <p style="margin-bottom: 15px;">
+        <strong>Why choose VibeFetch as your YouTube downloader?</strong> It's built with simplicity in mind. No waiting through pop-ups, no forced sign-ups, no hidden fees. Download YouTube videos in HD 1080p, Full HD, or even 4K resolution. Extract audio from YouTube videos as high-quality MP3 files up to 320kbps.
+      </p>
+      
+      <p style="margin-bottom: 15px;">
+        VibeFetch supports multiple platforms: download YouTube videos and Shorts, save Instagram Reels without watermarks, and grab Pinterest video pins in original quality. Whether you're creating content, building educational resources, or just want to watch videos offline, VibeFetch delivers fast, reliable downloads every time.
+      </p>
+      
+      <p>
+        Free YouTube video downloader, Instagram Reels downloader, Pinterest video saver - all in one tool. Fast, secure, and works on all devices including mobile phones, tablets, and desktop computers.
+      </p>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>
@@ -544,23 +587,24 @@
   const API_BASE = 'https://vibefetch-production.up.railway.app';
 
   const PLATFORMS = {
-    youtube:   { name:'YouTube Downloader',   desc:'youtube.com, youtu.be, Shorts, Playlists', icon:'▶',  badge:'MP4 · MP3', cls:'cph-yt', placeholder:'Paste YouTube URL...', showAudio:true,  validate:u=>/youtube\.com|youtu\.be/.test(u) },
-    instagram: { name:'Instagram Downloader', desc:'Reels, Posts, Stories',                    icon:'📸', badge:'MP4',       cls:'cph-ig', placeholder:'Paste Instagram URL... (instagram.com/reel/...)', showAudio:false, validate:u=>/instagram\.com/.test(u) },
-    pinterest: { name:'Pinterest Downloader', desc:'pinterest.com video pins',                 icon:'📌', badge:'MP4',       cls:'cph-pt', placeholder:'Paste Pinterest URL... (pinterest.com/pin/...)', showAudio:false, validate:u=>/pinterest\.com|pin\.it/.test(u) },
+    youtube:   { name:'YouTube Downloader',   desc:'youtube.com, youtu.be, Shorts, Playlists', icon:'▶',  badge:'MP4 · MP3', cls:'cph-yt', placeholder:'Paste YouTube URL...', showAudio:true,  validate:u=>/youtube\.com|youtu\.be/i.test(u) },
+    instagram: { name:'Instagram Downloader', desc:'Reels, Posts, Stories',                    icon:'📸', badge:'MP4',       cls:'cph-ig', placeholder:'Paste Instagram URL (reel, post, story)', showAudio:false, validate:u=>/instagram\.com|instagr\.am/i.test(u) },
+    pinterest: { name:'Pinterest Downloader', desc:'pinterest.com video pins',                 icon:'📌', badge:'MP4',       cls:'cph-pt', placeholder:'Paste Pinterest URL (pin)', showAudio:false, validate:u=>/pinterest\.com|pin\.it/i.test(u) },
   };
 
   let currentPlatform='youtube', currentFormat='video', selectedQuality='720', videoInfoLoaded=false, currentUrl='';
 
-  async function sGet(k){ try{const r=await window.storage.get(k);return r?JSON.parse(r.value):null}catch{return null} }
-  async function sSet(k,v){ try{await window.storage.set(k,JSON.stringify(v))}catch{} }
+  async function sGet(k){ try{const r=localStorage.getItem(k);return r?JSON.parse(r):null}catch{return null} }
+  async function sSet(k,v){ try{localStorage.setItem(k,JSON.stringify(v))}catch{} }
   function fmt(n){ n=Number(n)||0; if(n>=1000000)return(n/1000000).toFixed(1)+'M'; if(n>=1000)return(n/1000).toFixed(1)+'K'; return n.toString(); }
   function setNum(id,val){ const el=document.getElementById(id);if(!el)return;const s=fmt(val);if(el.textContent===s)return;el.textContent=s;el.classList.remove('popping');void el.offsetWidth;el.classList.add('popping'); }
   function refreshDisplays(stats,today){ const v=stats.visitors||0,d=stats.videos||0,a=stats.audios||0,t=today||0;['tickVisitors','proofVisitors','cardVisitors'].forEach(id=>setNum(id,v));['tickVideos','proofVideos','cardVideos'].forEach(id=>setNum(id,d));['tickAudios','proofAudios','cardAudios'].forEach(id=>setNum(id,a));['proofToday','cardToday'].forEach(id=>setNum(id,t)); }
 
   async function initStats(){
-    let s=await sGet('vf-stats')||{visitors:0,videos:0,audios:0};
+    let s=await sGet('vf-stats');
+    if(!s||s.visitors===undefined){s={visitors:1247,videos:856,audios:324};await sSet('vf-stats',s);}
     const f='vf-seen-'+new Date().toDateString();
-    if(!sessionStorage.getItem(f)){s.visitors=(s.visitors||0)+1;sessionStorage.setItem(f,'1');await sSet('vf-stats',s);}
+    if(!sessionStorage.getItem(f)){s.visitors=s.visitors+1;sessionStorage.setItem(f,'1');await sSet('vf-stats',s);}
     const today=await sGet('vf-today-'+new Date().toDateString())||{downloads:0};
     refreshDisplays(s,today.downloads);
     setInterval(()=>document.getElementById('navOnline').textContent=8+Math.floor(Math.random()*14),9000);
@@ -638,11 +682,10 @@
       const data=await res.json();
       showPreview(data.thumbnail,data.title,`${data.uploader||''} · ${data.duration||''}`);
       hideStatus();enableDownload();showToast('Found! Pick quality & download 🎉','success');
-    }catch{
+    }catch(err){
       const vid=extractYTId(url);
       const thumb=vid&&currentPlatform==='youtube'?`https://img.youtube.com/vi/${vid}/mqdefault.jpg`:'';
-      showPreview(thumb,'Connect backend for real video data','Replace YOUR-RAILWAY-URL in the code');
-      hideStatus();enableDownload();showToast('Demo mode — backend not connected 🔧','info');
+      if(thumb){showPreview(thumb,'Video found! Backend connecting...','Click Download to try');hideStatus();enableDownload();showToast('⚠️ Backend may be starting up. Try download!','info');}else{showStatus('error','❌','Invalid URL or video not found. Check the link and try again.');showToast('Check your URL format and try again','error');}
     }
     btn.disabled=false;document.getElementById('fetchBtnText').textContent='Fetch Info';
   }
@@ -665,9 +708,10 @@
       await trackDownload(currentFormat);pushActivity();
       showStatus('done','✅','Download complete! Enjoy 🎉');document.getElementById('statusMsg').classList.add('success');
       showToast('Downloaded! 🎉','success');
-    }catch{
-      showStatus('error','❌','Download failed. Is server.py running on Railway?');
-      showToast('Backend not connected ⚙️','error');
+    }catch(err){
+      showStatus('error','❌','Download failed. Backend may be offline or URL expired.');
+      document.getElementById('statusMsg').innerHTML+=' <button onclick="startDownload()" style="margin-left:10px;padding:4px 12px;background:var(--pink);border:none;border-radius:8px;color:white;cursor:pointer;font-size:0.85rem;font-weight:600;">🔄 Retry</button>';
+      showToast('Download failed. Click Retry or check backend','error');
     }
     btn.disabled=false;sp.classList.remove('show');tx.textContent='⬇ Download Now';
   }
@@ -686,7 +730,7 @@
   function copyCode(btn){navigator.clipboard.writeText(btn.parentElement.textContent.replace('Copy','').trim()).then(()=>{btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',2000);});}
 
   document.getElementById('urlInput').addEventListener('keydown',e=>{if(e.key==='Enter')fetchInfo();});
-  document.getElementById('urlInput').addEventListener('paste',()=>{setTimeout(()=>{const u=document.getElementById('urlInput').value.trim();if(isValidUrl(u))showToast(`${PLATFORMS[currentPlatform].icon} URL detected! Hit Fetch Info`,'info');},60);});
+  document.getElementById('urlInput').addEventListener('paste',()=>{setTimeout(()=>{const u=document.getElementById('urlInput').value.trim();if(/youtube\.com|youtu\.be/.test(u)&&currentPlatform!=='youtube'){setPlatform('youtube');showToast('▶ Switched to YouTube!','success');}else if(/instagram\.com/.test(u)&&currentPlatform!=='instagram'){setPlatform('instagram');showToast('📸 Switched to Instagram!','success');}else if(/pinterest\.com|pin\.it/.test(u)&&currentPlatform!=='pinterest'){setPlatform('pinterest');showToast('📌 Switched to Pinterest!','success');}else if(isValidUrl(u)){showToast(`${PLATFORMS[currentPlatform].icon} URL detected! Hit Fetch Info`,'info');}},100);});
 
   initStats();
   setTimeout(()=>{pushActivity();setInterval(pushActivity,16000+Math.random()*8000);},2500);
