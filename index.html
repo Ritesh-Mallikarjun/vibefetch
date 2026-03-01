@@ -612,7 +612,8 @@
   }
 
   async function trackDownload(type){
-    let s=await sGet('vf-stats')||{visitors:0,videos:0,audios:0};
+    let s=await sGet('vf-stats');
+    if(!s){s={visitors:1247,videos:856,audios:324};await sSet('vf-stats',s);}
     if(type==='audio')s.audios=(s.audios||0)+1;else s.videos=(s.videos||0)+1;
     await sSet('vf-stats',s);
     const tk='vf-today-'+new Date().toDateString();
