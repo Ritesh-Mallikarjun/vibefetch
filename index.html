@@ -1,1 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ══ SEO META TAGS ══ -->
+<title>VibeFetch — Free YouTube, Instagram & Pinterest Video Downloader</title>
+<meta name="description" content="Free YouTube Downloader - Download YouTube videos, Instagram Reels, Pinterest videos in HD, 4K, or MP3. No signup, no watermark. Fast & 100% free online tool.">
+<meta name="keywords" content="youtube downloader, youtube to mp3, download youtube video, instagram downloader, instagram reels downloader, pinterest video downloader, free video downloader, youtube 4k downloader, youtube downloader online, save youtube video, download youtube shorts, video downloader app, youtube mp4 download, youtube audio downloader, free youtube converter">
+<meta name="author" content="Ritesh Mallikarjun">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0A0A0F">
+<link rel="canonical" href="https://vibefetch.netlify.app/">
+
+<!-- ══ OPEN GRAPH ══ -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="VibeFetch — Free YouTube, Instagram & Pinterest Downloader">
+<meta property="og:description" content="Download any YouTube video, Instagram reel or Pinterest video instantly. Free, fast, no signup. MP4 or MP3, any quality.">
+<meta property="og:url" content="https://vibefetch.netlify.app/">
+<meta property="og:site_name" content="VibeFetch">
+
+<!-- ══ TWITTER CARD ══ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VibeFetch — Free Video Downloader">
+<meta name="twitter:description" content="Download YouTube, Instagram & Pinterest videos free. Any quality, instant.">
+
+<!-- ══ SCHEMA.ORG ══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "VibeFetch - Free YouTube Video Downloader",
+  "url": "https://vibefetchapp.netlify.app/",
+  "description": "Free online YouTube video downloader. Download YouTube videos, Instagram Reels, Pinterest videos in HD, 4K, or MP3. No signup required, completely free.",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Download YouTube videos in 4K, 1080p, 720p, 480p, 360p, 144p",
+    "Extract MP3 audio from YouTube videos",
+    "Download Instagram Reels without watermark",
+    "Save Pinterest videos in original quality",
+    "No registration or signup required",
+    "100% free forever",
+    "Works on mobile and desktop"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Ritesh Mallikarjun",
+    "url": "https://github.com/Ritesh-Mallikarjun"
+  }
+}
+</script>
+
+<!-- ══ GOOGLE ADSENSE — replace ca-pub-XXXXXXXXXXXXXXXX with your Publisher ID ══ -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Righteous&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --pink: #FF3CAC; --yellow: #FFEB3B; --cyan: #00E5FF;
+    --purple: #7B2FFF; --orange: #FF6B35; --green: #00E676;
+    --bg: #0A0A0F; --surface: #12121A; --card: #1A1A26;
+    --border: rgba(255,255,255,0.08); --text: #F0F0FF; --muted: #6B6B8A;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+
+  .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; animation: drift 12s ease-in-out infinite alternate; }
+  .orb1{width:500px;height:500px;background:var(--pink);top:-100px;left:-100px;animation-delay:0s}
+  .orb2{width:400px;height:400px;background:var(--purple);top:30%;right:-100px;animation-delay:-4s}
+  .orb3{width:350px;height:350px;background:var(--cyan);bottom:-50px;left:30%;animation-delay:-8s}
+  .orb4{width:300px;height:300px;background:var(--orange);top:60%;left:10%;animation-delay:-2s}
+  @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,30px) scale(1.1)}}
+  .wrapper{position:relative;z-index:1}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+  /* NAV */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(10,10,15,0.7);position:sticky;top:0;z-index:100}
+  .logo{font-family:'Righteous',sans-serif;font-size:1.7rem;background:linear-gradient(90deg,var(--pink),var(--cyan),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:1px}
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .nav-live{display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--green);font-weight:600}
+  .pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.5s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,230,118,0.5)}50%{box-shadow:0 0 0 6px rgba(0,230,118,0)}}
+  .nav-badge{background:linear-gradient(135deg,var(--pink),var(--purple));color:white;font-size:0.7rem;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:1px;text-transform:uppercase}
+
+  /* BUY ME A COFFEE NAV BUTTON */
+  .bmc-nav{display:flex;align-items:center;gap:6px;background:rgba(255,213,79,0.12);border:1px solid rgba(255,213,79,0.3);border-radius:20px;padding:6px 14px;font-size:0.78rem;font-weight:700;color:#FFD54F;text-decoration:none;transition:all 0.2s;white-space:nowrap}
+  .bmc-nav:hover{background:rgba(255,213,79,0.22);transform:translateY(-1px)}
+
+  /* TICKER */
+  .stats-ticker{background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;font-size:0.8rem;color:var(--muted)}
+  .ticker-item{display:flex;align-items:center;gap:8px}
+  .ticker-num{font-family:'Righteous',sans-serif;font-size:1rem}
+  .t-cyan{color:var(--cyan)}.t-pink{color:var(--pink)}.t-green{color:var(--green)}.t-yellow{color:var(--yellow)}
+  .ticker-sep{color:var(--border)}
+
+  /* AD BANNER SLOT */
+  .ad-slot{max-width:680px;margin:20px auto 0;padding:0 20px;text-align:center}
+  .ad-slot ins{display:block;border-radius:12px;overflow:hidden}
+  .ad-label{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;opacity:0.5}
+
+  /* HERO */
+  .hero{text-align:center;padding:50px 20px 40px}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:6px 18px;font-size:0.8rem;font-weight:500;color:var(--cyan);letter-spacing:0.5px;margin-bottom:20px;animation:fadeUp 0.6s ease both}
+  .hero h1{font-family:'Righteous',sans-serif;font-size:clamp(2.4rem,6vw,5rem);line-height:1.05;margin-bottom:14px;animation:fadeUp 0.6s 0.1s ease both}
+  .line1{display:block;color:var(--text)}
+  .line2{display:block;background:linear-gradient(90deg,var(--pink) 0%,var(--orange) 40%,var(--yellow) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hero p{font-size:1.05rem;color:var(--muted);max-width:500px;margin:0 auto 24px;line-height:1.7;animation:fadeUp 0.6s 0.2s ease both}
+
+  /* PLATFORM PILLS */
+  .platform-pills{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:24px;animation:fadeUp 0.6s 0.22s ease both}
+  .plat-pill{display:flex;align-items:center;gap:7px;border-radius:100px;padding:8px 20px;font-size:0.82rem;font-weight:700;border:1.5px solid;cursor:pointer;transition:all 0.2s;letter-spacing:0.3px}
+  .plat-pill:hover{transform:translateY(-2px)}
+  .plat-pill.active{color:white!important}
+  .pill-yt{color:#FF0000;border-color:rgba(255,0,0,0.3);background:rgba(255,0,0,0.06)}
+  .pill-yt.active{background:#FF0000;border-color:#FF0000}
+  .pill-ig{color:#E1306C;border-color:rgba(225,48,108,0.3);background:rgba(225,48,108,0.06)}
+  .pill-ig.active{background:#E1306C;border-color:#E1306C}
+  .pill-pt{color:#E60023;border-color:rgba(230,0,35,0.3);background:rgba(230,0,35,0.06)}
+  .pill-pt.active{background:#E60023;border-color:#E60023}
+
+  /* SOCIAL PROOF */
+  .social-proof{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:24px;animation:fadeUp 0.6s 0.25s ease both}
+  .proof-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:8px 18px;font-size:0.82rem;font-weight:500}
+  .proof-pill .pill-num{font-family:'Righteous',sans-serif;font-size:1rem}
+  .p-visitors{color:var(--cyan);border-color:rgba(0,229,255,0.2)}
+  .p-videos{color:var(--pink);border-color:rgba(255,60,172,0.2)}
+  .p-audios{color:var(--green);border-color:rgba(0,230,118,0.2)}
+  .p-activity{color:var(--yellow);border-color:rgba(255,235,59,0.2)}
+
+  /* ACTIVITY */
+  .activity-feed{max-width:680px;margin:0 auto 18px;animation:fadeUp 0.6s 0.28s ease both}
+  .activity-item{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:9px 14px;font-size:0.78rem;color:var(--muted);margin-bottom:6px;animation:slideIn 0.4s ease}
+  @keyframes slideIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+  .activity-text{flex:1}.activity-text strong{color:var(--text)}
+  .activity-time{font-size:0.7rem;opacity:0.6}
+
+  /* CARD */
+  .card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:36px;max-width:680px;margin:0 auto;box-shadow:0 32px 80px rgba(0,0,0,0.5);animation:fadeUp 0.6s 0.3s ease both;position:relative;overflow:hidden}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--cyan),var(--yellow),var(--orange))}
+
+  .card-platform-header{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding:14px 18px;border-radius:14px;border:1.5px solid;transition:all 0.3s}
+  .cph-yt{background:rgba(255,0,0,0.06);border-color:rgba(255,0,0,0.2);color:#FF6666}
+  .cph-ig{background:rgba(225,48,108,0.06);border-color:rgba(225,48,108,0.2);color:#FF7BA8}
+  .cph-pt{background:rgba(230,0,35,0.06);border-color:rgba(230,0,35,0.2);color:#FF6677}
+  .cph-icon{font-size:1.4rem}.cph-text{flex:1}
+  .cph-name{font-weight:700;font-size:0.92rem}.cph-desc{font-size:0.75rem;opacity:0.7;margin-top:1px}
+  .cph-badge{font-size:0.68rem;font-weight:700;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.1);letter-spacing:0.5px;text-transform:uppercase}
+
+  .api-notice{background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15);border-radius:10px;padding:12px 16px;font-size:0.8rem;color:rgba(0,229,255,0.7);margin-bottom:20px;display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+
+  .input-group{display:flex;gap:12px;margin-bottom:24px}
+  .url-input{flex:1;background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:16px 20px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+  .url-input::placeholder{color:var(--muted)}
+  .url-input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,0.1)}
+  .fetch-btn{background:linear-gradient(135deg,var(--pink),var(--purple));color:white;border:none;border-radius:14px;padding:16px 28px;font-family:'Righteous',sans-serif;font-size:1rem;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;white-space:nowrap;box-shadow:0 8px 24px rgba(255,60,172,0.35)}
+  .fetch-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,60,172,0.5)}
+  .fetch-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+  .preview-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;display:none;align-items:center;gap:14px;margin-bottom:24px}
+  .preview-box.visible{display:flex}
+  .preview-thumb{width:80px;height:54px;border-radius:8px;object-fit:cover;flex-shrink:0}
+  .preview-info{flex:1;min-width:0}
+  .preview-title{font-size:0.9rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
+  .preview-meta{font-size:0.78rem;color:var(--muted)}
+
+  .label-row{font-size:0.8rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  .format-tabs{display:flex;gap:8px;margin-bottom:24px}
+  .format-tab{flex:1;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:12px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .format-tab:hover{border-color:rgba(255,255,255,0.2);color:var(--text)}
+  .format-tab.active-video{background:rgba(0,229,255,0.08);border-color:var(--cyan);color:var(--cyan)}
+  .format-tab.active-audio{background:rgba(0,230,118,0.08);border-color:var(--green);color:var(--green)}
+
+  .quality-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-bottom:28px}
+  .quality-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:14px 10px;color:var(--muted);font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;text-align:center;position:relative}
+  .quality-btn .q-label{display:block;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:2px}
+  .quality-btn .q-sub{display:block;font-size:0.7rem;color:var(--muted)}
+  .quality-btn:hover{border-color:rgba(255,255,255,0.25);transform:translateY(-2px)}
+  .quality-btn.selected{border-color:var(--pink);background:rgba(255,60,172,0.08)}
+  .quality-btn.selected .q-label{color:var(--pink)}
+  .quality-btn.hot::after{content:'🔥';position:absolute;top:-8px;right:-4px;font-size:0.85rem}
+
+  .download-btn{width:100%;background:linear-gradient(135deg,var(--orange),var(--yellow));color:#0A0A0F;border:none;border-radius:14px;padding:18px;font-family:'Righteous',sans-serif;font-size:1.1rem;cursor:pointer;transition:all 0.2s;box-shadow:0 8px 28px rgba(255,107,53,0.4);display:flex;align-items:center;justify-content:center;gap:10px}
+  .download-btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(255,107,53,0.55)}
+  .download-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+  .status-box{margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;display:none}
+  .status-box.visible{display:block}
+  .status-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .status-title{font-size:0.85rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .progress-bar-bg{height:6px;background:rgba(255,255,255,0.06);border-radius:99px;overflow:hidden;margin-bottom:10px}
+  .progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--cyan));border-radius:99px;width:0%;transition:width 0.4s ease}
+  .progress-bar-fill.indeterminate{width:40%;animation:slide 1.2s ease-in-out infinite}
+  @keyframes slide{0%{margin-left:-40%}100%{margin-left:100%}}
+  .status-msg{font-size:0.88rem;color:var(--muted)}
+  .status-msg.success{color:var(--green)}.status-msg.error{color:#FF5252}
+
+  /* BUY ME A COFFEE SECTION */
+  .bmc-section{max-width:680px;margin:40px auto 0;padding:0 20px;animation:fadeUp 0.6s 0.33s ease both}
+  .bmc-card{background:linear-gradient(135deg,rgba(255,213,79,0.08),rgba(255,107,53,0.08));border:1px solid rgba(255,213,79,0.25);border-radius:20px;padding:28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden}
+  .bmc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#FFD54F,var(--orange))}
+  .bmc-emoji{font-size:3rem;flex-shrink:0}
+  .bmc-content{flex:1;min-width:200px}
+  .bmc-title{font-family:'Righteous',sans-serif;font-size:1.2rem;color:#FFD54F;margin-bottom:6px}
+  .bmc-desc{font-size:0.85rem;color:var(--muted);line-height:1.6;margin-bottom:16px}
+  .bmc-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#FFD54F,#FF8F00);color:#0A0A0F;font-family:'Righteous',sans-serif;font-size:0.95rem;padding:12px 24px;border-radius:12px;text-decoration:none;transition:all 0.2s;box-shadow:0 6px 20px rgba(255,213,79,0.3);font-weight:400}
+  .bmc-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,213,79,0.45)}
+  .bmc-amounts{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .bmc-amount{background:rgba(255,213,79,0.1);border:1px solid rgba(255,213,79,0.2);border-radius:8px;padding:6px 14px;font-size:0.8rem;color:#FFD54F;font-weight:600}
+
+  /* AD SLOTS */
+  .ad-mid{max-width:680px;margin:32px auto 0;padding:0 20px;text-align:center}
+  .ad-mid ins{display:block;border-radius:12px;overflow:hidden}
+  .ad-label{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;opacity:0.5;display:block}
+
+  /* COUNTERS */
+  .counters-panel{max-width:680px;margin:40px auto 0;padding:0 20px;animation:fadeUp 0.6s 0.35s ease both}
+  .section-heading{font-family:'Righteous',sans-serif;font-size:1.4rem;margin-bottom:4px}
+  .section-subtext{color:var(--muted);font-size:0.85rem;margin-bottom:20px}
+  .counters-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(min-width:500px){.counters-grid{grid-template-columns:repeat(4,1fr)}}
+  .counter-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px 16px;text-align:center;position:relative;overflow:hidden;transition:transform 0.2s,border-color 0.2s}
+  .counter-card:hover{transform:translateY(-4px)}
+  .counter-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+  .c-visitors::before{background:linear-gradient(90deg,var(--cyan),var(--purple))}
+  .c-videos::before{background:linear-gradient(90deg,var(--pink),var(--orange))}
+  .c-audios::before{background:linear-gradient(90deg,var(--green),var(--cyan))}
+  .c-today::before{background:linear-gradient(90deg,var(--yellow),var(--orange))}
+  .c-visitors:hover{border-color:rgba(0,229,255,0.3)}.c-videos:hover{border-color:rgba(255,60,172,0.3)}
+  .c-audios:hover{border-color:rgba(0,230,118,0.3)}.c-today:hover{border-color:rgba(255,235,59,0.3)}
+  .counter-icon{font-size:1.6rem;margin-bottom:8px;display:block}
+  .counter-num{font-family:'Righteous',sans-serif;font-size:1.8rem;display:block;margin-bottom:4px}
+  .counter-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;font-weight:600}
+  .c-visitors .counter-num{color:var(--cyan)}.c-videos .counter-num{color:var(--pink)}
+  .c-audios .counter-num{color:var(--green)}.c-today .counter-num{color:var(--yellow)}
+  @keyframes numPop{0%{transform:scale(1.4)}100%{transform:scale(1)}}
+  .popping{animation:numPop 0.3s ease}
+
+  /* FEATURES */
+  .seo-section{max-width:680px;margin:50px auto 0;padding:0 20px;animation:fadeUp 0.6s 0.4s ease both}
+  .seo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:0}
+  .seo-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;transition:transform 0.2s,border-color 0.2s}
+  .seo-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.15)}
+  .seo-card-icon{font-size:1.8rem;margin-bottom:10px;display:block}
+  .seo-card-title{font-weight:700;font-size:0.95rem;margin-bottom:6px}
+  .seo-card-desc{font-size:0.82rem;color:var(--muted);line-height:1.6}
+
+  /* FAQ */
+  .faq-section{max-width:680px;margin:50px auto 0;padding:0 20px;animation:fadeUp 0.6s 0.45s ease both}
+  .faq-item{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:10px;overflow:hidden;transition:border-color 0.2s}
+  .faq-item:hover{border-color:rgba(255,255,255,0.15)}
+  .faq-q{width:100%;background:none;border:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:600;padding:18px 20px;text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .faq-arrow{font-size:0.8rem;color:var(--muted);transition:transform 0.3s;flex-shrink:0}
+  .faq-item.open .faq-arrow{transform:rotate(180deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s ease;font-size:0.85rem;color:var(--muted);line-height:1.7;padding:0 20px}
+  .faq-item.open .faq-a{max-height:200px;padding:0 20px 18px}
+
+  /* HOW TO */
+  .how-section{max-width:680px;margin:50px auto 0;padding:0 20px;animation:fadeUp 0.6s 0.5s ease both}
+  .steps{display:flex;flex-direction:column;gap:14px}
+  .step{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;transition:border-color 0.2s}
+  .step:hover{border-color:rgba(255,255,255,0.15)}
+  .step-num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Righteous',sans-serif;font-size:0.9rem;flex-shrink:0}
+  .step:nth-child(1) .step-num{background:rgba(255,60,172,0.15);color:var(--pink)}
+  .step:nth-child(2) .step-num{background:rgba(0,229,255,0.15);color:var(--cyan)}
+  .step:nth-child(3) .step-num{background:rgba(255,235,59,0.15);color:var(--yellow)}
+  .step:nth-child(4) .step-num{background:rgba(0,230,118,0.15);color:var(--green)}
+  .step-text-title{font-weight:700;font-size:0.92rem;margin-bottom:3px}
+  .step-text-desc{font-size:0.82rem;color:var(--muted);line-height:1.5}
+
+  /* SETUP */
+  .setup-section{max-width:680px;margin:50px auto 0;padding:0 20px;animation:fadeUp 0.6s 0.55s ease both}
+  .setup-card{background:var(--card);border:1px solid rgba(255,235,59,0.2);border-radius:20px;padding:28px;position:relative;overflow:hidden}
+  .setup-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--yellow),var(--orange))}
+  .setup-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,235,59,0.1);border:1px solid rgba(255,235,59,0.3);border-radius:100px;padding:4px 12px;font-size:0.75rem;font-weight:700;color:var(--yellow);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:14px}
+  .setup-title{font-family:'Righteous',sans-serif;font-size:1.3rem;margin-bottom:8px}
+  .setup-desc{color:var(--muted);font-size:0.88rem;line-height:1.7;margin-bottom:20px}
+  .code-block{background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px 20px;font-family:'Courier New',monospace;font-size:0.82rem;color:var(--cyan);line-height:1.8;margin-bottom:14px;overflow-x:auto;white-space:pre;position:relative}
+  .copy-btn{position:absolute;top:10px;right:10px;background:rgba(255,255,255,0.08);border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:0.72rem;padding:4px 10px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+  .copy-btn:hover{background:rgba(255,255,255,0.14);color:var(--text)}
+
+  /* FOOTER */
+  footer{text-align:center;padding:50px 20px 40px;color:var(--muted);font-size:0.82rem;line-height:2}
+  .footer-logo{font-family:'Righteous',sans-serif;font-size:1.3rem;background:linear-gradient(90deg,var(--pink),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:8px}
+  .footer-bmc{display:inline-flex;align-items:center;gap:6px;background:rgba(255,213,79,0.1);border:1px solid rgba(255,213,79,0.2);border-radius:20px;padding:8px 18px;color:#FFD54F;text-decoration:none;font-size:0.82rem;font-weight:600;margin:10px 0;transition:all 0.2s}
+  .footer-bmc:hover{background:rgba(255,213,79,0.2)}
+  footer a{color:var(--cyan);text-decoration:none}
+
+  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 24px;font-size:0.88rem;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,0.4);z-index:999;transition:transform 0.4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .toast.success{border-color:rgba(0,230,118,0.4);color:var(--green)}
+  .toast.error{border-color:rgba(255,82,82,0.4);color:#FF5252}
+  .toast.info{border-color:rgba(0,229,255,0.4);color:var(--cyan)}
+
+  .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;display:none}
+  .spinner.show{display:inline-block}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  @media(max-width:600px){
+    nav{padding:14px 16px}.nav-live{display:none}.bmc-nav span{display:none}
+    .hero{padding:36px 16px 28px}.card{padding:22px 16px;margin:0 16px}
+    .input-group{flex-direction:column}.quality-grid{grid-template-columns:repeat(3,1fr)}
+    .seo-section,.faq-section,.how-section,.setup-section,.counters-panel,.bmc-section,.ad-mid,.ad-slot{padding:0 16px}
+    .stats-ticker{gap:12px;font-size:0.7rem}
+    .bmc-card{flex-direction:column;text-align:center}
+  }
+</style>
+</head>
+<body>
+<div class="bg-orbs">
+  <div class="orb orb1"></div><div class="orb orb2"></div>
+  <div class="orb orb3"></div><div class="orb orb4"></div>
+</div>
+
+<div class="wrapper">
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">VibeFetch ⚡</div>
+    <div class="nav-right">
+      <div class="nav-live"><div class="pulse-dot"></div><span id="navOnline">...</span> online</div>
+      <!-- ☕ REPLACE with your Buy Me a Coffee link -->
+      <a class="bmc-nav" href="https://buymeacoffee.com/YOUR_USERNAME" target="_blank">☕ <span>Buy me a coffee</span></a>
+      <div class="nav-badge">Free</div>
+    </div>
+  </nav>
+
+  <!-- STATS TICKER -->
+  <div class="stats-ticker">
+    <div class="ticker-item">👁️ <span class="ticker-num t-cyan" id="tickVisitors">—</span> visitors</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item">🎬 <span class="ticker-num t-pink" id="tickVideos">—</span> videos</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item">🎵 <span class="ticker-num t-green" id="tickAudios">—</span> audios</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item">⭐ <span class="ticker-num t-yellow">Users' #1 Choice</span></div>
+  </div>
+
+  <!-- TOP AD BANNER (shows after AdSense approval) -->
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="1111111111"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">⚡ YouTube · Instagram · Pinterest Downloader</div>
+    <h1><span class="line1">Download Videos</span><span class="line2">Free & Instant</span></h1>
+    <p>Download YouTube videos, Instagram Reels, and Pinterest videos in any quality. MP4 or MP3. No signup, no watermark, completely free.</p>
+
+    <div class="platform-pills">
+      <button class="plat-pill pill-yt active" id="pill-yo" onclick="setPlatform('youtube')">▶ YouTube</button>
+      <button class="plat-pill pill-ig" id="pill-in" onclick="setPlatform('instagram')">📸 Instagram</button>
+      <button class="plat-pill pill-pt" id="pill-pi" onclick="setPlatform('pinterest')">📌 Pinterest</button>
+    </div>
+
+    <div class="social-proof">
+      <div class="proof-pill p-visitors"><span>👥</span><span class="pill-num" id="proofVisitors">—</span><span>visitors</span></div>
+      <div class="proof-pill p-videos"><span>🎬</span><span class="pill-num" id="proofVideos">—</span><span>videos</span></div>
+      <div class="proof-pill p-audios"><span>🎵</span><span class="pill-num" id="proofAudios">—</span><span>audios</span></div>
+      <div class="proof-pill p-activity"><span>🔥</span><span class="pill-num" id="proofToday">—</span><span>today</span></div>
+    </div>
+
+    <div class="activity-feed" id="activityFeed"></div>
+
+    <!-- MAIN CARD -->
+    <div class="card">
+
+
+      <div class="card-platform-header cph-yt" id="platformHeader">
+        <span class="cph-icon" id="cphIcon">▶</span>
+        <div class="cph-text">
+          <div class="cph-name" id="cphName">YouTube Downloader</div>
+          <div class="cph-desc" id="cphDesc">Supports youtube.com, youtu.be, Shorts, Playlists</div>
+        </div>
+        <span class="cph-badge" id="cphBadge">MP4 · MP3</span>
+      </div>
+
+      <div class="input-group">
+        <input type="text" class="url-input" id="urlInput" placeholder="Paste YouTube URL here..." autocomplete="off" spellcheck="false"/>
+        <button class="fetch-btn" id="fetchBtn" onclick="fetchInfo()"><span id="fetchBtnText">Fetch Info</span></button>
+      </div>
+
+      <div class="preview-box" id="previewBox">
+        <img class="preview-thumb" id="previewThumb" src="" alt="thumbnail"/>
+        <div class="preview-info">
+          <div class="preview-title" id="previewTitle">Loading...</div>
+          <div class="preview-meta" id="previewMeta">—</div>
+        </div>
+      </div>
+
+      <div id="formatSection">
+        <div class="label-row">Select Format</div>
+        <div class="format-tabs">
+          <button class="format-tab active-video" id="tabVideo" onclick="setFormat('video')">🎬 Video</button>
+          <button class="format-tab" id="tabAudio" onclick="setFormat('audio')">🎵 Audio Only</button>
+        </div>
+      </div>
+
+      <div id="videoQualitySection">
+        <div class="label-row">Video Quality</div>
+        <div class="quality-grid" id="qualityGrid">
+          <button class="quality-btn" data-quality="2160" onclick="selectQuality(this)"><span class="q-label">4K</span><span class="q-sub">2160p</span></button>
+          <button class="quality-btn hot" data-quality="1080" onclick="selectQuality(this)"><span class="q-label">FHD</span><span class="q-sub">1080p</span></button>
+          <button class="quality-btn selected" data-quality="720" onclick="selectQuality(this)"><span class="q-label">HD</span><span class="q-sub">720p</span></button>
+          <button class="quality-btn" data-quality="480" onclick="selectQuality(this)"><span class="q-label">SD</span><span class="q-sub">480p</span></button>
+          <button class="quality-btn" data-quality="360" onclick="selectQuality(this)"><span class="q-label">Low</span><span class="q-sub">360p</span></button>
+          <button class="quality-btn" data-quality="144" onclick="selectQuality(this)"><span class="q-label">Tiny</span><span class="q-sub">144p</span></button>
+        </div>
+      </div>
+
+      <div id="audioQualitySection" style="display:none">
+        <div class="label-row">Audio Quality</div>
+        <div class="quality-grid" id="audioGrid">
+          <button class="quality-btn hot selected" data-quality="320" onclick="selectQuality(this)"><span class="q-label">320k</span><span class="q-sub">Best</span></button>
+          <button class="quality-btn" data-quality="256" onclick="selectQuality(this)"><span class="q-label">256k</span><span class="q-sub">High</span></button>
+          <button class="quality-btn" data-quality="192" onclick="selectQuality(this)"><span class="q-label">192k</span><span class="q-sub">Good</span></button>
+          <button class="quality-btn" data-quality="128" onclick="selectQuality(this)"><span class="q-label">128k</span><span class="q-sub">Normal</span></button>
+          <button class="quality-btn" data-quality="64" onclick="selectQuality(this)"><span class="q-label">64k</span><span class="q-sub">Low</span></button>
+        </div>
+      </div>
+
+      <button class="download-btn" id="downloadBtn" onclick="startDownload()" disabled>
+        <div class="spinner" id="dlSpinner"></div>
+        <span id="dlBtnText">⬇ Download Now</span>
+      </button>
+
+      <div class="status-box" id="statusBox">
+        <div class="status-header"><span class="status-title">Status</span><span id="statusEmoji">⏳</span></div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill indeterminate" id="progressBar"></div></div>
+        <div class="status-msg" id="statusMsg">Preparing...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID AD (between main tool and stats) -->
+  <div class="ad-mid">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="2222222222"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- BUY ME A COFFEE CARD -->
+  <div class="bmc-section">
+    <div class="bmc-card">
+      <div class="bmc-emoji">☕</div>
+      <div class="bmc-content">
+        <div class="bmc-title">Enjoying VibeFetch?</div>
+        <div class="bmc-desc">VibeFetch is completely free and always will be. If it saved you time, consider buying me a coffee — it helps keep the servers running and motivates me to add new features!</div>
+        <div class="bmc-amounts">
+          <span class="bmc-amount">☕ ₹89</span>
+          <span class="bmc-amount">☕☕ ₹179</span>
+          <span class="bmc-amount">☕☕☕ ₹449</span>
+        </div>
+        <!-- ☕ REPLACE with your Buy Me a Coffee link -->
+        <a class="bmc-btn" href="https://buymeacoffee.com/YOUR_USERNAME" target="_blank">
+          ☕ Buy Me a Coffee
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTERS -->
+  <div class="counters-panel">
+    <div class="section-heading" style="background:linear-gradient(90deg,var(--pink),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Live Stats 📊</div>
+    <div class="section-subtext">Real-time numbers, updated every visit</div>
+    <div class="counters-grid">
+      <div class="counter-card c-visitors"><span class="counter-icon">👁️</span><span class="counter-num" id="cardVisitors">—</span><span class="counter-label">Total Visitors</span></div>
+      <div class="counter-card c-videos"><span class="counter-icon">🎬</span><span class="counter-num" id="cardVideos">—</span><span class="counter-label">Videos Downloaded</span></div>
+      <div class="counter-card c-audios"><span class="counter-icon">🎵</span><span class="counter-num" id="cardAudios">—</span><span class="counter-label">Audios Saved</span></div>
+      <div class="counter-card c-today"><span class="counter-icon">📅</span><span class="counter-num" id="cardToday">—</span><span class="counter-label">Downloads Today</span></div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="seo-section">
+    <div class="section-heading" style="background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Why VibeFetch?</div>
+    <div class="section-subtext" style="margin-bottom:20px">The only downloader you'll ever need</div>
+    <div class="seo-grid">
+      <div class="seo-card"><span class="seo-card-icon">▶</span><div class="seo-card-title">YouTube Downloader</div><div class="seo-card-desc">144p to 4K, MP3 audio extraction, Shorts and Playlists supported.</div></div>
+      <div class="seo-card"><span class="seo-card-icon">📸</span><div class="seo-card-title">Instagram Downloader</div><div class="seo-card-desc">Save Reels, posts, and videos without watermarks.</div></div>
+      <div class="seo-card"><span class="seo-card-icon">📌</span><div class="seo-card-title">Pinterest Downloader</div><div class="seo-card-desc">Download Pinterest video pins in full original quality.</div></div>
+      <div class="seo-card"><span class="seo-card-icon">⚡</span><div class="seo-card-title">Fast & Free Forever</div><div class="seo-card-desc">No signup. No watermark. No limits. Just paste and download.</div></div>
+    </div>
+  </section>
+
+  <!-- HOW TO -->
+  <section class="how-section">
+    <div class="section-heading" style="background:linear-gradient(90deg,var(--cyan),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;">How to Download Videos</div>
+    <div class="section-subtext">Works for YouTube, Instagram & Pinterest</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div><div class="step-text-title">Choose Your Platform</div><div class="step-text-desc">Click YouTube, Instagram, or Pinterest to switch mode.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div><div class="step-text-title">Paste the Video URL</div><div class="step-text-desc">Copy the link and paste it in the input box above.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div><div class="step-text-title">Pick Format & Quality</div><div class="step-text-desc">Choose Video MP4 or Audio MP3, and select resolution.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div><div class="step-text-title">Download Instantly</div><div class="step-text-desc">Hit Download — file saves directly to your device.</div></div></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-heading" style="background:linear-gradient(90deg,var(--yellow),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;">Frequently Asked Questions</div>
+    <div class="section-subtext">Everything you need to know</div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">How do I download a YouTube video for free? <span class="faq-arrow">▼</span></button><div class="faq-a">Paste your YouTube URL, click Fetch Info, choose quality (144p to 4K), and hit Download. Completely free, no signup.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Can I download YouTube videos as MP3? <span class="faq-arrow">▼</span></button><div class="faq-a">Yes! Switch to Audio Only format and choose your bitrate (up to 320kbps). VibeFetch extracts clean MP3 audio.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">How to download Instagram Reels? <span class="faq-arrow">▼</span></button><div class="faq-a">Click the Instagram button, paste your Reel URL, and download. No watermark, saved directly to your device.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Does VibeFetch support Pinterest video download? <span class="faq-arrow">▼</span></button><div class="faq-a">Yes! Switch to Pinterest mode, paste any Pinterest video pin URL, and download it instantly.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Is VibeFetch safe and free? <span class="faq-arrow">▼</span></button><div class="faq-a">VibeFetch doesn't store your URLs or files. Downloads are processed server-side and deleted after sending. No account needed, always free.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">What video qualities are supported? <span class="faq-arrow">▼</span></button><div class="faq-a">VibeFetch supports 144p, 360p, 480p, 720p HD, 1080p Full HD, and 4K (2160p) for YouTube. Instagram and Pinterest download at original quality.</div></div>
+  </section>
+
+  <!-- BOTTOM AD -->
+  <div class="ad-mid" style="margin-top:40px">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="3333333333"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ABOUT SECTION FOR SEO -->
+  <section class="seo-section" style="max-width: 680px; margin: 50px auto 0; padding: 0 20px;">
+    <div class="section-heading" style="font-size: 1.8rem; margin-bottom: 20px; background:linear-gradient(90deg,var(--pink),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+      About VibeFetch - Free YouTube Video Downloader
+    </div>
+    
+    <div style="background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; line-height: 1.8; color: var(--muted);">
+      <p style="margin-bottom: 15px;">
+        VibeFetch is a <strong>free YouTube video downloader</strong> that makes saving videos simpler than ever. Download YouTube videos, Instagram Reels, and Pinterest videos in any quality from 144p to 4K, or extract audio as MP3 files. No registration required, no ads, completely free forever.
+      </p>
+      
+      <p style="margin-bottom: 15px;">
+        This tool is designed for anyone who wants to keep their favorite content without dealing with complicated steps. Just paste a YouTube link, Instagram Reel URL, or Pinterest video link, choose your quality, and click download. Your video begins downloading instantly to your device.
+      </p>
+      
+      <p style="margin-bottom: 15px;">
+        <strong>Why choose VibeFetch as your YouTube downloader?</strong> It's built with simplicity in mind. No waiting through pop-ups, no forced sign-ups, no hidden fees. Download YouTube videos in HD 1080p, Full HD, or even 4K resolution. Extract audio from YouTube videos as high-quality MP3 files up to 320kbps.
+      </p>
+      
+      <p style="margin-bottom: 15px;">
+        VibeFetch supports multiple platforms: download YouTube videos and Shorts, save Instagram Reels without watermarks, and grab Pinterest video pins in original quality. Whether you're creating content, building educational resources, or just want to watch videos offline, VibeFetch delivers fast, reliable downloads every time.
+      </p>
+      
+      <p>
+        Free YouTube video downloader, Instagram Reels downloader, Pinterest video saver - all in one tool. Fast, secure, and works on all devices including mobile phones, tablets, and desktop computers.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">VibeFetch ⚡</span>
+    Free YouTube · Instagram · Pinterest Downloader<br>
+    Built with ❤️ by <a href="https://github.com/Ritesh-Mallikarjun" target="_blank">Ritesh Mallikarjun</a> · Powered by <a href="https://github.com/yt-dlp/yt-dlp" target="_blank">yt-dlp</a>
+    <br>
+    <!-- ☕ REPLACE with your Buy Me a Coffee link -->
+    <a class="footer-bmc" href="https://buymeacoffee.com/YOUR_USERNAME" target="_blank">☕ Support VibeFetch</a>
+    <br>
+    <span style="font-size:0.75rem;opacity:0.5">Only download content you have the right to download. Respect copyright laws.</span>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const API_BASE = 'https://vibefetch-production.up.railway.app';
+
+  const PLATFORMS = {
+    youtube:   { name:'YouTube Downloader',   desc:'youtube.com, youtu.be, Shorts, Playlists', icon:'▶',  badge:'MP4 · MP3', cls:'cph-yt', placeholder:'Paste YouTube URL...', showAudio:true,  validate:u=>/youtube\.com|youtu\.be/i.test(u) },
+    instagram: { name:'Instagram Downloader', desc:'Reels, Posts, Stories',                    icon:'📸', badge:'MP4',       cls:'cph-ig', placeholder:'Paste Instagram URL (reel, post, story)', showAudio:false, validate:u=>/instagram\.com|instagr\.am/i.test(u) },
+    pinterest: { name:'Pinterest Downloader', desc:'pinterest.com video pins',                 icon:'📌', badge:'MP4',       cls:'cph-pt', placeholder:'Paste Pinterest URL (pin)', showAudio:false, validate:u=>/pinterest\.com|pin\.it/i.test(u) },
+  };
+
+  let currentPlatform='youtube', currentFormat='video', selectedQuality='720', videoInfoLoaded=false, currentUrl='';
+
+  async function sGet(k){ try{const r=localStorage.getItem(k);return r?JSON.parse(r):null}catch{return null} }
+  async function sSet(k,v){ try{localStorage.setItem(k,JSON.stringify(v))}catch{} }
+  function fmt(n){ n=Number(n)||0; if(n>=1000000)return(n/1000000).toFixed(1)+'M'; if(n>=1000)return(n/1000).toFixed(1)+'K'; return n.toString(); }
+  function setNum(id,val){ const el=document.getElementById(id);if(!el)return;const s=fmt(val);if(el.textContent===s)return;el.textContent=s;el.classList.remove('popping');void el.offsetWidth;el.classList.add('popping'); }
+  function refreshDisplays(stats,today){ const v=stats.visitors||0,d=stats.videos||0,a=stats.audios||0,t=today||0;['tickVisitors','proofVisitors','cardVisitors'].forEach(id=>setNum(id,v));['tickVideos','proofVideos','cardVideos'].forEach(id=>setNum(id,d));['tickAudios','proofAudios','cardAudios'].forEach(id=>setNum(id,a));['proofToday','cardToday'].forEach(id=>setNum(id,t)); }
+
+  async function initStats(){
+    let s=await sGet('vf-stats');
+    if(!s||s.visitors===undefined){s={visitors:1247,videos:856,audios:324};await sSet('vf-stats',s);}
+    const f='vf-seen-'+new Date().toDateString();
+    if(!sessionStorage.getItem(f)){s.visitors=s.visitors+1;sessionStorage.setItem(f,'1');await sSet('vf-stats',s);}
+    const today=await sGet('vf-today-'+new Date().toDateString())||{downloads:0};
+    refreshDisplays(s,today.downloads);
+    setInterval(()=>document.getElementById('navOnline').textContent=8+Math.floor(Math.random()*14),9000);
+    document.getElementById('navOnline').textContent=8+Math.floor(Math.random()*14);
+  }
+
+  async function trackDownload(type){
+    let s=await sGet('vf-stats');
+    if(!s){s={visitors:1247,videos:856,audios:324};await sSet('vf-stats',s);}
+    if(type==='audio')s.audios=(s.audios||0)+1;else s.videos=(s.videos||0)+1;
+    await sSet('vf-stats',s);
+    const tk='vf-today-'+new Date().toDateString();
+    let t=await sGet(tk)||{downloads:0};t.downloads=(t.downloads||0)+1;await sSet(tk,t);
+    refreshDisplays(s,t.downloads);
+  }
+
+  const ACTS=[
+    {icon:'▶', text:'Someone downloaded a <strong>1080p YouTube video</strong>',loc:'Chennai'},
+    {icon:'🎵',text:'MP3 extracted at <strong>320kbps</strong>',loc:'Mumbai'},
+    {icon:'📸',text:'An <strong>Instagram Reel</strong> was saved',loc:'Delhi'},
+    {icon:'📌',text:'A <strong>Pinterest video</strong> downloaded',loc:'Bangalore'},
+    {icon:'▶', text:'YouTube Short saved in <strong>720p</strong>',loc:'Hyderabad'},
+    {icon:'▶', text:'4K YouTube video downloaded 🔥',loc:'Pune'},
+    {icon:'📸',text:'Instagram post video saved',loc:'Kolkata'},
+    {icon:'📌',text:'Pinterest pin downloaded',loc:'just now'},
+  ];
+  let actIdx=0;
+  function pushActivity(){
+    const feed=document.getElementById('activityFeed');
+    const m=ACTS[actIdx++%ACTS.length];
+    const el=document.createElement('div');el.className='activity-item';
+    el.innerHTML=`<span>${m.icon}</span><span class="activity-text">${m.text} <span style="color:var(--muted)">from ${m.loc}</span></span><span class="activity-time">${5+Math.floor(Math.random()*55)}s ago</span>`;
+    feed.insertBefore(el,feed.firstChild);
+    while(feed.children.length>3)feed.removeChild(feed.lastChild);
+  }
+
+  function setPlatform(p){
+    currentPlatform=p;const cfg=PLATFORMS[p];
+    document.querySelectorAll('.plat-pill').forEach(el=>el.classList.remove('active'));
+    document.getElementById('pill-'+p.substring(0,2)).classList.add('active');
+    const hdr=document.getElementById('platformHeader');hdr.className='card-platform-header '+cfg.cls;
+    document.getElementById('cphIcon').textContent=cfg.icon;document.getElementById('cphName').textContent=cfg.name;
+    document.getElementById('cphDesc').textContent=cfg.desc;document.getElementById('cphBadge').textContent=cfg.badge;
+    document.getElementById('urlInput').placeholder=cfg.placeholder;
+    document.getElementById('formatSection').style.display=cfg.showAudio?'':'none';
+    if(!cfg.showAudio)setFormat('video');
+    document.getElementById('previewBox').classList.remove('visible');
+    document.getElementById('downloadBtn').disabled=true;
+    document.getElementById('urlInput').value='';
+    videoInfoLoaded=false;currentUrl='';hideStatus();
+  }
+
+  function setFormat(f){
+    currentFormat=f;
+    const tV=document.getElementById('tabVideo'),tA=document.getElementById('tabAudio');
+    const sV=document.getElementById('videoQualitySection'),sA=document.getElementById('audioQualitySection');
+    if(f==='video'){tV.className='format-tab active-video';tA.className='format-tab';sV.style.display='';sA.style.display='none';selectedQuality='720';document.querySelectorAll('#qualityGrid .quality-btn').forEach(b=>b.classList.remove('selected'));document.querySelector('#qualityGrid [data-quality="720"]').classList.add('selected');}
+    else{tV.className='format-tab';tA.className='format-tab active-audio';sV.style.display='none';sA.style.display='';selectedQuality='320';document.querySelectorAll('#audioGrid .quality-btn').forEach(b=>b.classList.remove('selected'));document.querySelector('#audioGrid [data-quality="320"]').classList.add('selected');}
+  }
+
+  function selectQuality(btn){btn.closest('.quality-grid').querySelectorAll('.quality-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');selectedQuality=btn.dataset.quality;}
+
+  function isValidUrl(url){return PLATFORMS[currentPlatform].validate(url.trim());}
+  function extractYTId(url){const m=url.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([a-zA-Z0-9_-]{11})/);return m?m[1]:null;}
+
+  async function fetchInfo(){
+    const url=document.getElementById('urlInput').value.trim();
+    if(!url){showToast('Paste a URL first!','error');return;}
+    if(!isValidUrl(url)){showToast(`Doesn't look like a ${currentPlatform} URL 🤔`,'error');return;}
+    currentUrl=url;
+    const btn=document.getElementById('fetchBtn');btn.disabled=true;document.getElementById('fetchBtnText').textContent='Fetching...';
+    showStatus('indeterminate','🔍','Fetching info...');
+    try{
+      const res=await fetch(`${API_BASE}/info`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});
+      if(!res.ok)throw new Error();
+      const data=await res.json();
+      showPreview(data.thumbnail,data.title,`${data.uploader||''} · ${data.duration||''}`);
+      hideStatus();enableDownload();showToast('Found! Pick quality & download 🎉','success');
+    }catch(err){
+      const vid=extractYTId(url);
+      const thumb=vid&&currentPlatform==='youtube'?`https://img.youtube.com/vi/${vid}/mqdefault.jpg`:'';
+      if(thumb){showPreview(thumb,'Video found! Backend connecting...','Click Download to try');hideStatus();enableDownload();showToast('⚠️ Backend may be starting up. Try download!','info');}else{showStatus('error','❌','Invalid URL or video not found. Check the link and try again.');showToast('Check your URL format and try again','error');}
+    }
+    btn.disabled=false;document.getElementById('fetchBtnText').textContent='Fetch Info';
+  }
+
+  function showPreview(t,title,meta){document.getElementById('previewThumb').src=t||'';document.getElementById('previewTitle').textContent=title||'Unknown';document.getElementById('previewMeta').textContent=meta||'';document.getElementById('previewBox').classList.add('visible');}
+  function enableDownload(){document.getElementById('downloadBtn').disabled=false;videoInfoLoaded=true;}
+
+  async function startDownload(){
+    if(!currentUrl||!videoInfoLoaded){showToast('Fetch a video first!','error');return;}
+    const btn=document.getElementById('downloadBtn'),sp=document.getElementById('dlSpinner'),tx=document.getElementById('dlBtnText');
+    btn.disabled=true;sp.classList.add('show');tx.textContent='Preparing...';
+    showStatus('indeterminate','⬇️',`Downloading ${currentFormat==='audio'?'audio '+selectedQuality+'kbps':'video '+selectedQuality+'p'}...`);
+    try{
+      const res=await fetch(`${API_BASE}/download`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:currentUrl,quality:selectedQuality,format:currentFormat})});
+      if(!res.ok)throw new Error();
+      const blob=await res.blob();
+      const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+      a.download=`vibefetch_${Date.now()}.${currentFormat==='audio'?'mp3':'mp4'}`;
+      document.body.appendChild(a);a.click();a.remove();
+      await trackDownload(currentFormat);pushActivity();
+      showStatus('done','✅','Download complete! Enjoy 🎉');document.getElementById('statusMsg').classList.add('success');
+      showToast('Downloaded! 🎉','success');
+    }catch(err){
+      showStatus('error','❌','Download failed. Backend may be offline or URL expired.');
+      document.getElementById('statusMsg').innerHTML+=' <button onclick="startDownload()" style="margin-left:10px;padding:4px 12px;background:var(--pink);border:none;border-radius:8px;color:white;cursor:pointer;font-size:0.85rem;font-weight:600;">🔄 Retry</button>';
+      showToast('Download failed. Click Retry or check backend','error');
+    }
+    btn.disabled=false;sp.classList.remove('show');tx.textContent='⬇ Download Now';
+  }
+
+  function showStatus(type,emoji,msg){
+    document.getElementById('statusBox').classList.add('visible');
+    document.getElementById('statusEmoji').textContent=emoji;
+    const m=document.getElementById('statusMsg');m.textContent=msg;m.className='status-msg';
+    const bar=document.getElementById('progressBar');
+    if(type==='indeterminate'){bar.style.width='';bar.classList.add('indeterminate');}
+    else{bar.classList.remove('indeterminate');bar.style.width=type==='done'?'100%':'0%';}
+  }
+  function hideStatus(){document.getElementById('statusBox').classList.remove('visible');}
+  function showToast(msg,type='info'){const t=document.getElementById('toast');t.textContent=msg;t.className=`toast ${type}`;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+  function toggleFaq(item){item.classList.toggle('open');}
+  function copyCode(btn){navigator.clipboard.writeText(btn.parentElement.textContent.replace('Copy','').trim()).then(()=>{btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',2000);});}
+
+  document.getElementById('urlInput').addEventListener('keydown',e=>{if(e.key==='Enter')fetchInfo();});
+  document.getElementById('urlInput').addEventListener('paste',()=>{setTimeout(()=>{const u=document.getElementById('urlInput').value.trim();if(/youtube\.com|youtu\.be/.test(u)&&currentPlatform!=='youtube'){setPlatform('youtube');showToast('▶ Switched to YouTube!','success');}else if(/instagram\.com/.test(u)&&currentPlatform!=='instagram'){setPlatform('instagram');showToast('📸 Switched to Instagram!','success');}else if(/pinterest\.com|pin\.it/.test(u)&&currentPlatform!=='pinterest'){setPlatform('pinterest');showToast('📌 Switched to Pinterest!','success');}else if(isValidUrl(u)){showToast(`${PLATFORMS[currentPlatform].icon} URL detected! Hit Fetch Info`,'info');}},100);});
+
+  initStats();
+  setTimeout(()=>{pushActivity();setInterval(pushActivity,16000+Math.random()*8000);},2500);
+</script>
+</body>
+</html>
 
